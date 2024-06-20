@@ -28,18 +28,17 @@ describe('AppComponent', () => {
     expect(component).toBeTruthy();
   });
 
-  it('should retrieve weather forecasts from the server', () => {
-    const mockForecasts = [
-      { date: '2021-10-01', temperatureC: 20, temperatureF: 68, summary: 'Mild' },
-      { date: '2021-10-02', temperatureC: 25, temperatureF: 77, summary: 'Warm' }
+  it('should retrieve products from the server', () => {
+    const mockproducts = [
+      { id: 3, name: 'Iphone 11', price: 1000 }     
     ];
 
     component.ngOnInit();
 
-    const req = httpMock.expectOne('/weatherforecast');
+    const req = httpMock.expectOne('http://localhost:5252/api/Product');
     expect(req.request.method).toEqual('GET');
-    req.flush(mockForecasts);
+    req.flush(mockproducts);
 
-    expect(component.forecasts).toEqual(mockForecasts);
+    expect(component.products).toEqual(mockproducts);
   });
 });
